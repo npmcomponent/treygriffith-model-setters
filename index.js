@@ -20,6 +20,8 @@ module.exports = function (values) {
 };
 
 
+
+
 /**
  * Bind to the model's construct event.
  *
@@ -31,29 +33,30 @@ function bind (Model, dict) {
   setters = dict.setters || {};
   getters = dict.getters || {};
 
-  Model.on('construct', function (model, attrs) {
-    each(Model.attrs, function (key, options) {
+  var attr = Model.attr;
 
-      var set, get, setter, getter;
+  Model.attr = function (name, options) {
 
-      setter = options.set || setters[key];
-      getter = options.get || getters[key];
+    attr.apply(Model, arguments);
 
-      get = set = model.prototype[key];
+    var set = Model.prototype[key]
+      , get = set
+      , setter = options.set || setters[key]
+      , getter = options.get || getters[key];
 
-      model.prototype[key] = function (val) {
+    Model.prototype[key] = function (val) {
 
-        if(0 == arguments.length) {
+      if(0 == arguments.length) {
 
-          if(type(getter) === 'function') return getter.apply(model, get.call(model));
+        if(type(getter) === 'function') return getter.apply(this, get.call(this));
 
-          return get.call(model);
-        }
+        return get.call(this);
+      }
 
-        if(type(setter) === 'function') val = setter.apply(model, arguments);
+      if(type(setter) === 'function') val = setter.apply(this, arguments);
 
-        set.call(model, val);
-      };
-    });
-  });
+      set.call(this, val);
+
+    };
+  };
 }
