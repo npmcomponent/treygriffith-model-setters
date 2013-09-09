@@ -1,0 +1,20 @@
+{
+  "name": "model-setters",
+  "repo": "treygriffith/model-setters",
+  "description": "Lets a model specify custom getters and setters when changing an attribute",
+  "keywords": ["model", "setter", "setters", "set", "getter", "getters", "get"],
+  "license": "MIT",
+  "version": "0.0.1",
+  "dependencies": {
+    "component/each": "*",
+    "component/type": "*"
+  },
+  "scripts": [
+    "index.js"
+  ],
+  "development": {
+    "component/assert": "*",
+    "component/type": "*",
+    "treygriffith/model": "*"
+  }
+}
