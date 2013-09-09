@@ -39,12 +39,12 @@ function bind (Model, dict) {
 
     attr.apply(Model, arguments);
 
-    var set = Model.prototype[key]
+    var set = Model.prototype[name]
       , get = set
-      , setter = options.set || setters[key]
-      , getter = options.get || getters[key];
+      , setter = options.set || setters[name]
+      , getter = options.get || getters[name];
 
-    Model.prototype[key] = function (val) {
+    Model.prototype[name] = function (val) {
 
       if(0 == arguments.length) {
 
