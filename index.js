@@ -58,5 +58,7 @@ function bind (Model, dict) {
       set.call(this, val);
 
     };
+
+    return this;
   };
 }
