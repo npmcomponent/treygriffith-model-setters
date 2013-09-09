@@ -11,14 +11,15 @@ describe('model-setters', function () {
     var Order = model('order')
       .use(setters)
       .attr('amount', { set: function (amt) {
-        return parseInt(amt, 10);
-      }});
+        amt = amt.replace(/[^0-9\.]+/g, '');
+        return Math.round(parseFloat(amt) * 100);
+      } });
 
     var order = new Order();
 
     order.amount('$50');
 
-    assert(50 === order.amount());
+    assert(5000 === order.amount());
   });
 
   it('should send all get operations through the getter', function () {
@@ -51,13 +52,14 @@ describe('model-setters', function () {
           }
         }
       }))
-      .attr('weapons')
+      .attr('visibility')
       .attr('belt');
 
     var ninja = new Ninja();
+
     ninja.visibility('50%');
     assert(ninja.attrs.visibility === 0.5);
-    assert(ninja.visibility() === '50%');
+    assert(ninja.visibility() === '50.00%');
 
     ninja.belt('black');
     assert(ninja.belt() === 'ninja black');

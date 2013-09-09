@@ -30,25 +30,26 @@ module.exports = function (values) {
 
 function bind (Model, dict) {
   dict || (dict = {});
-  setters = dict.setters || {};
-  getters = dict.getters || {};
 
   var attr = Model.attr;
 
   Model.attr = function (name, options) {
 
+    options = options || {};
+    var globals = dict[name] || {};
+
     attr.apply(Model, arguments);
 
     var set = Model.prototype[name]
       , get = set
-      , setter = options.set || setters[name]
-      , getter = options.get || getters[name];
+      , setter = options.set || globals.set
+      , getter = options.get || globals.get
 
     Model.prototype[name] = function (val) {
 
       if(0 == arguments.length) {
 
-        if(type(getter) === 'function') return getter.apply(this, get.call(this));
+        if(type(getter) === 'function') return getter.call(this, get.call(this));
 
         return get.call(this);
       }
