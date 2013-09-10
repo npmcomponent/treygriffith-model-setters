@@ -9,7 +9,7 @@
 ## API
 
 ```js
-var defaults = require('model-setters')
+var setters = require('model-setters')
   , model = require('model');
 
 // all specified up front
