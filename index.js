@@ -1,6 +1,6 @@
 
-var each = require('each')
-  , type = require('type');
+var each = require('component-each')
+  , type = require('component-type');
 
 
 /**

@@ -1,0 +1,19 @@
+{
+  "name": "treygriffith-model-setters",
+  "description": "Lets a model specify custom getters and setters when changing an attribute",
+  "version": "0.0.1",
+  "keywords": [
+    "model",
+    "setter",
+    "setters",
+    "set",
+    "getter",
+    "getters",
+    "get"
+  ],
+  "dependencies": {
+    "component-each": "git://github.com/npmcomponent/component-each.git",
+    "component-type": "git://github.com/npmcomponent/component-type.git"
+  },
+  "license": "MIT"
+}
